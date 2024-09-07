@@ -1,0 +1,97 @@
+\documentclass[12pt]{article} % Document class
+
+% Packages for math symbols and formatting
+\usepackage{amsmath, amssymb, amsthm} 
+\usepackage{graphicx} % For including graphics
+\usepackage{hyperref} % For hyperlinks
+
+% Theorem, Lemma, and Proof Environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+% Title and Author
+\title{Notes on Nonparametric Statistics}
+\author{José Manuel Rodríguez Caballero}
+\date{\today}
+
+\begin{document}
+
+\maketitle % Generates title, author, and date
+
+\section{The Wilcoxon Rank Sum}
+Given two positive integers $n$ and $N$, we define the Wilcoxon Rank Sum distribution $\mathbf{P}\left( W^N_n = k\right)$ via the generating function
+\begin{equation}
+\frac{\binom{N}{n}_q}{\binom{N}{n}} = \sum_{k=0}^{\frac{N(N+1)}{2}}  \mathbf{P}\left( W^N_n = k\right) q^k, 
+\end{equation}
+where the polynomials $\binom{N}{n}_q$ are given by the product
+\begin{equation}
+\prod_{n=1}^N \left( 1 - z q^n\right) = \sum_{n=0}^N (-1)^n  \binom{N}{n}_q z^n.
+\end{equation}
+
+\begin{theorem}
+For two positive integers $n$ and $N$, we have
+\begin{eqnarray}
+\label{eq:expectation_W} \mathbf{E}\left( W^N_n \right) &=& \frac{n(N+1)}{2}, \\
+\label{eq:variance_W} \mathbf{Var}\left( W^N_n \right) &=& \frac{n(N-n)(N+1)}{12}.
+\end{eqnarray}
+\end{theorem}
+
+\begin{proof}
+Using the notations
+\begin{eqnarray}
+F &=& \prod_{n=1}^N \left( 1 - z q^n\right), \\
+G &=& \sum_{k\geq 1} \left(q^k + q^{2k} + q^{3k} + ... + q^{Nk}  \right) \frac{z^k}{k},
+\end{eqnarray}
+we have
+\begin{equation}
+F = e^{-G}.
+\end{equation}
+
+Let $\mathcal{H} = q\frac{d}{dq}$, it follows
+\begin{eqnarray}
+\mathcal{H} F &=& - e^{-G} \mathcal{H}, \\
+\mathcal{H}^2 F &=& e^{-G} \left[ \left(\mathcal{H} G\right)^2 - \mathcal{H}^2 G \right] .
+\end{eqnarray}
+
+We compute 
+\begin{eqnarray}
+\mathcal{H} G \big|_{q=1} &=& \frac{N(N+1)}{2} \frac{z}{1-z}, \\
+\mathcal{H}^2 G \big|_{q=1} &=& \frac{N(N+1)(2N+1)}{6} \frac{z}{(1-z)^2},
+\end{eqnarray}
+and
+\begin{eqnarray}
+\mathcal{H} F \big|_{q=1} &=& -\frac{N(N+1)}{2} z(1-z)^{N-1}, \\
+\mathcal{H}^2 F \big|_{q=1} &=& \scalebox{1}{$(1-z)^{N-2}\left[ \left(\frac{N(N+1)}{2} \right)^2 z^2 - \frac{N(N+1)(2N+1)}{6} z  \right].$}
+\end{eqnarray}
+
+Considering the coefficients of both sides,
+\begin{eqnarray}
+\label{eq:expectation_W1} \frac{\mathcal{H} \left.\binom{N}{n}_q\right|_{q=1}}{\binom{N}{n}} &=& \frac{n(N+1)}{2}, \\
+\label{eq:expectation_W2} \frac{\mathcal{H}^2 \left.\binom{N}{n}_q\right|_{q=1}}{\binom{N}{n}} &=& \frac{n(N+1)(3nN+2n+N)}{12}.
+\end{eqnarray}
+
+By definition of the expected value,
+\begin{eqnarray}
+\label{eq:expectation_W3} \frac{\mathcal{H} \left.\binom{N}{n}_q\right|_{q=1}}{\binom{N}{n}} &=& \mathbf{E}\left[W^N_n\right], \\
+\label{eq:expectation_W4} \frac{\mathcal{H}^2 \left.\binom{N}{n}_q\right|_{q=1}}{\binom{N}{n}} &=& \mathbf{E}\left[\left(W^N_n\right)^2\right].
+\end{eqnarray}
+
+Combining \eqref{eq:expectation_W1} and \eqref{eq:expectation_W3}, we obtain \eqref{eq:expectation_W}.
+
+By definition of the variance,
+
+\begin{equation}
+\label{eq:variance_W1}
+\mathbf{Var}\left[W^N_n\right] = \mathbf{E}\left[\left(W^N_n\right)^2\right] - \left(\mathbf{E}\left[W^N_n\right] \right)^2.
+\end{equation}
+
+Combining \eqref{eq:expectation_W1}, \eqref{eq:expectation_W2}, \eqref{eq:expectation_W3} and \eqref{eq:variance_W1} we obtain \eqref{eq:variance_W}.
+\end{proof}
+
+
+\end{document}
