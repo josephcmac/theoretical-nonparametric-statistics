@@ -26,11 +26,11 @@
 \section{The Wilcoxon Rank Sum}
 Given two positive integers $n$ and $N$, we define the Wilcoxon Rank Sum distribution $\mathbf{P}\left( W^N_n = k\right)$ via the generating function
 \begin{equation}
-\frac{\binom{N}{n}_q}{\binom{N}{n}} = \sum_{k=0}^{\frac{N(N+1)}{2}}  \mathbf{P}\left( W^N_n = k\right) q^k, 
+\frac{\binom{N}{n}_q}{\binom{N}{n}} = \sum_{k=\frac{n(n+1)}{2}}^{\frac{n(2N-n+1)}{2}}  \mathbf{P}\left( W^N_n = k\right) q^k, \label{eq:binom_P}
 \end{equation}
 where the polynomials $\binom{N}{n}_q$ are given by the product
 \begin{equation}
-\prod_{n=1}^N \left( 1 - z q^n\right) = \sum_{n=0}^N (-1)^n  \binom{N}{n}_q z^n.
+\prod_{n=1}^N \left( 1 - z q^n\right) = \sum_{n=0}^N (-1)^n  \binom{N}{n}_q z^n. \label{eq:def_qbinom}
 \end{equation}
 
 \begin{theorem}
@@ -93,5 +93,27 @@ By definition of the variance,
 Combining \eqref{eq:expectation_W1}, \eqref{eq:expectation_W2}, \eqref{eq:expectation_W3} and \eqref{eq:variance_W1} we obtain \eqref{eq:variance_W}.
 \end{proof}
 
+\begin{theorem}
+For two positive integers $n$ and $N$, we have that $W^N_n$ is symmetric, i.e.,
+\begin{equation}
+\label{eq:sym_W} \mathbf{P}\left( W^N_n = k \right) = \mathbf{P}\left( W^N_n = n\left(N+1\right) - k \right),
+\end{equation}
+for all $\frac{n(n+1)}{2} \leq k \leq \frac{n(2N-n+1)}{2}$.
+\end{theorem}
+
+\begin{proof}
+The function $F(q,z) = \prod_{n=1}^N \left( 1 - z q^n\right)$ is invariant under the transformation $q\mapsto q^{-1}$ and $z\mapsto z q^{N+1}$,
+
+\begin{equation} \label{eq:sym_F}
+F\left(q^{-1}, z q^{N+1}\right) = F\left(q, z\right).
+\end{equation}
+
+Equating coefficients in \eqref{eq:sym_F}, according to \eqref{eq:def_qbinom}, we obtain
+
+\begin{equation} \label{eq:sym_G}
+q^{n(N+1)} \binom{N}{n}_{q^{-1}} = \binom{N}{n}_q,
+\end{equation}
+where $\binom{N}{n}_{q^{-1}}$ is the result of the substitution of $q$ by $q^{-1}$ in $\binom{N}{n}_q$. Combining \eqref{eq:sym_G} and \eqref{eq:binom_P}, we conclude \eqref{eq:sym_W}.
+\end{proof}
 
 \end{document}
