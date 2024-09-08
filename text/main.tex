@@ -116,4 +116,30 @@ q^{n(N+1)} \binom{N}{n}_{q^{-1}} = \binom{N}{n}_q,
 where $\binom{N}{n}_{q^{-1}}$ is the result of the substitution of $q$ by $q^{-1}$ in $\binom{N}{n}_q$. Combining \eqref{eq:sym_G} and \eqref{eq:binom_P}, we conclude \eqref{eq:sym_W}.
 \end{proof}
 
+\begin{theorem}
+For two positive integers $n$ and $N$, consider two families of random variables $X_1, X_2, X_3, ..., X_{N-n}$ and $Y_1, Y_2, Y_3, ..., Y_n$ such that they together are a random permutation of $1, 2, 3, ...., N$. For each $0 \leq k \leq n(N-n)$, we have
+\begin{equation}\label{eq:prob_triang}
+\mathbf{P}\left( W^N_n = \frac{n(n+1)}{2} + k \right) = \mathbf{P}\left( \#\{(i,j): X_i < Y_j \} =  k \right).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Without lost of generality, assume that $X_1 < X_2 < X_3 < ... < X_{N-n}$ and $Y_1 < Y_2 < Y_3 < ... < Y_n$. Let $k$ be the number of $(i, j)$ such that $X_i < Y_j$. Notice that $0 \leq k \leq n(N-n)$, because there are $N-n$ values of $X_i$ and $n$ values of $Y_j$. Our goal is to compute
+\begin{equation}
+W^N_n = Y_1 + Y_2 + Y_3 + ... + Y_n.
+\end{equation}
+
+For each $1 \leq j \leq n$, the number of $i$ such that $X_i < Y_j$ is $(Y_j - 1) - (j-1) = Y_j - j$. Hence,
+\begin{equation}
+\sum_{j=1}^n \left( Y_j - j \right) = k.
+\end{equation}
+
+It follows that
+\begin{equation}
+W^N_n = \frac{n(n+1)}{2} + k.
+\end{equation}
+
+Therefore, \eqref{eq:prob_triang} holds.
+\end{proof}
+
 \end{document}
